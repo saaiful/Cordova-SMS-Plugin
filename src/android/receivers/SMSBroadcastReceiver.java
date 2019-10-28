@@ -23,12 +23,10 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
         try {
             if (bundle != null) {
                 final Object[] pdusObj = (Object[]) bundle.get("pdus");
-
                 for(Object currentObj : pdusObj) {
-                    
+                    int slot = -1;
                     try {
                         Bundle bundle = intent.getExtras();
-                        int slot = -1;
                         if (bundle != null) {
                             Set<String> keySet = bundle.keySet();
                             for(String key:keySet){
