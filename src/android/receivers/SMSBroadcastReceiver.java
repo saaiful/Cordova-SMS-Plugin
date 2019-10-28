@@ -25,9 +25,38 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
                 final Object[] pdusObj = (Object[]) bundle.get("pdus");
 
                 for(Object currentObj : pdusObj) {
+                    int slot = -1;
+if (bundle != null) {
+Set<String> keySet = bundle.keySet();
+for(String key:keySet){
+  switch (key){
+    case "slot":slot = bundle.getInt("slot", -1);
+    break;
+    case "simId":slot = bundle.getInt("simId", -1);
+    break;
+    case "simSlot":slot = bundle.getInt("simSlot", -1);
+    break;
+    case "slot_id":slot = bundle.getInt("slot_id", -1);
+    break;
+    case "simnum":slot = bundle.getInt("simnum", -1);
+    break;
+    case "slotId":slot = bundle.getInt("slotId", -1);
+    break;
+    case "slotIdx":slot = bundle.getInt("slotIdx", -1);
+    break;
+    default:
+      if(key.toLowerCase().contains("slot")|key.toLowerCase().contains("sim")){
+       String value = bundle.getString(key, "-1");
+       if(value.equals("0")|value.equals("1")|value.equals("2")){
+         slot = bundle.getInt(key, -1);
+       }
+    }
+
+
+  }
+}
+    
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) currentObj);
-                    int slot = bundle.getInt("slot", -1);
-                    int sub = bundle.getInt("subscription", -1);
                     JSONObject sms = new JSONObject();
                     sms.put("message",currentMessage.getDisplayMessageBody());
                     sms.put("sender",currentMessage.getDisplayOriginatingAddress());
