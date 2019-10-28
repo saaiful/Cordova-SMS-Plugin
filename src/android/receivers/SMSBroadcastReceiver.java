@@ -26,18 +26,13 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
 
                 for(Object currentObj : pdusObj) {
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) currentObj);
-                    /*Message message = new Message(
-                            currentMessage.getDisplayMessageBody(),
-                            currentMessage.getDisplayOriginatingAddress(),
-                            "CordovaSMS",
-                            new Date()
-                    );
-                    DataProvider.getInstance().addMessage(message);*/
+                    int slot = bundle.getInt("slot", -1);
+                    int sub = bundle.getInt("subscription", -1);
                     JSONObject sms = new JSONObject();
                     sms.put("message",currentMessage.getDisplayMessageBody());
                     sms.put("sender",currentMessage.getDisplayOriginatingAddress());
                     /*sms.put("sim",currentMessage.getIndexOnIcc());*/
-                    sms.put("sim",currentMessage.getStatusOnIcc()); 
+                    sms.put("sim",slot); 
                     sms.put("service_center",currentMessage.getServiceCenterAddress());
                     
                     CordovaSMS.sendSMSPayload( sms.toString() );
