@@ -25,7 +25,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
                 final Object[] pdusObj = (Object[]) bundle.get("pdus");
                 for(Object currentObj : pdusObj) {
                     int slot = -1;
-                    slot = bundle.get("slot", -1);
+                    slot = bundle.get("slot");
     
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) currentObj);
                     JSONObject sms = new JSONObject();
