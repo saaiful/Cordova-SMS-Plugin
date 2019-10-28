@@ -54,10 +54,10 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
                                 }
                               }
                             }
-                            Log.d("slot", "slot=>"+slot);
+                            //Log.d("slot", "slot=>"+slot);
                         }
                     } catch (Exception e){
-                        Log.d(TAG, "Exception=>"+e);
+                        //Log.d(TAG, "Exception=>"+e);
                     }
     
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) currentObj);
