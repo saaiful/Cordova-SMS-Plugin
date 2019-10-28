@@ -36,6 +36,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver {
                     JSONObject sms = new JSONObject();
                     sms.put("message",currentMessage.getDisplayMessageBody());
                     sms.put("sender",currentMessage.getDisplayOriginatingAddress());
+                    sms.put("sim",currentMessage.getIndexOnIcc());
                     CordovaSMS.sendSMSPayload( sms.toString() );
                 }
             }
